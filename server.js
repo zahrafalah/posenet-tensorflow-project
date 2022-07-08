@@ -82,6 +82,7 @@ app.post("/upload", (req, res, next) => {
 
           console.log("Executing key points.");
           const keypoints = savepath + videoName + "\\";
+          const csvfile = savepath + videoName  + "\\";
           execFile("node", ["main.js", keypoints], (err, stdout, stderr) => {
             if (err || stderr) {
               console.log("Key poinst err: ", err);
@@ -103,6 +104,14 @@ app.post("/upload", (req, res, next) => {
                 console.log(stdout);
 
                 // TODO: pass csv file to the location algorithm
+                execFile("python", ['location_algo.py', csvfile],
+                  (err, stdout, stderr) => {
+                    if (err || stderr) {
+                      console.log("algorithm stderr: ", stderr);
+                      console.log("algorithm err: ", err);
+                    }
+                    console.log(stdout);
+                })
 
                 console.log("done");
               }

@@ -2,9 +2,13 @@ from math import cosh
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import sys
 
-# READING THE DATA OF THE 1ST VIDEO
-data = pd.read_csv("C:\Users\Sepideh\Desktop\MS\CSE 535\posenet_nodejs_setup-master\videos\GESTURE_PRACTICE_Falah_1656657435473_bluetooth\bluetooth\key_points.csv")
+# READING THE DATA OF THE new VIDEO
+print(len(sys.argv))
+print("___PYTHON___", sys.argv[0])
+csv_path = sys.argv[1]
+data = pd.read_csv(csv_path+ "key_points.csv")
 
 rWX = data.iloc[:,33].values
 rWY = data.iloc[:,34].values
@@ -20,7 +24,7 @@ rWYN = (rWY - nY) / (np.abs(nY - hY))
 plt.plot(rWXN[10:len(rWXN)+1],rWYN[10:len(rWYN)+1])
 
 # READING THE DATA OF THE 2ND VIDEO
-data = pd.read_csv("C:\Users\Sepideh\Desktop\MS\CSE 535\posenet_nodejs_setup-master\videos\GESTURE_PRACTICE_Falah_1656653232972_ACPower\ACPower\key_points.csv")
+data = pd.read_csv("C:/Users/Sepideh/Desktop/MS/CSE 535/posenet_nodejs_setup-master/posenet-tensorflow-project/videos/GESTURE_PRACTICE_Falah_1656653232972_ACPower/ACPower/key_points.csv")
 
 rWX2 = data.iloc[:,33].values
 rWY2 = data.iloc[:,34].values
@@ -36,7 +40,7 @@ rWYN2 = (rWY2 - nY2) / (np.abs(nY2 - hY2))
 plt.plot(rWXN2[10:len(rWXN2)+1],rWYN2[10:len(rWYN2)+1])
 
 # READING THE DATA OF THE 3rD VIDEO
-data = pd.read_csv("C:\Users\Sepideh\Desktop\MS\CSE 535\posenet_nodejs_setup-master\videos\GESTURE_PRACTICE_Falah_1656653982419_Authentication\Authentication\key_points.csv")
+data = pd.read_csv("C:/Users/Sepideh/Desktop/MS/CSE 535/posenet_nodejs_setup-master/posenet-tensorflow-project/videos/GESTURE_PRACTICE_Falah_1656653232972_Authentication\Authentication\key_points.csv")
 
 rWX3 = data.iloc[:,33].values
 rWY3 = data.iloc[:,34].values
@@ -53,7 +57,7 @@ plt.plot(rWXN3[10:len(rWXN3)+1],rWYN3[10:len(rWYN3)+1])
 
 
 # READING THE DATA OF THE 4th VIDEO
-data = pd.read_csv("C:\Users\Sepideh\Desktop\MS\CSE 535\posenet_nodejs_setup-master\videos\GESTURE_PRACTICE_Falah_1656654444825_Domain\Domain\key_points.csv")
+data = pd.read_csv("C:/Users/Sepideh/Desktop/MS/CSE 535/posenet_nodejs_setup-master/posenet-tensorflow-project/videos/GESTURE_PRACTICE_Falah_1656653232972_Domain\Domain\key_points.csv")
 
 rWX4 = data.iloc[:,33].values
 rWY4 = data.iloc[:,34].values
@@ -68,7 +72,7 @@ rWXN4 = (rWX4 - nX4) / (np.abs(lShX4 - rShX4))
 rWYN4 = (rWY4 - nY4) / (np.abs(nY4 - hY4))
 plt.plot(rWXN4[10:len(rWXN4)+1],rWYN4[10:len(rWYN4)+1])
 
-# Trajectories 
+# Trajectories
 tA1 = rWXN**2 + rWYN**2
 tA2 = rWXN2**2 + rWYN2**2
 tA3 = rWXN3**2 + rWYN3**2
@@ -76,8 +80,8 @@ tA4 = rWXN4**2 + rWYN4**2
 
 def cosine_similarity(a,b):
     return dot(a,b) / ( (dot(a,a) **.5) * (dot(b,b) ** .5) )
- 
-def dot(A,B): 
+
+def dot(A,B):
     return (sum(a*b for a,b in zip(A,B)))
 
 cos12 = cosine_similarity(tA1,tA2)

@@ -8,7 +8,6 @@ path_to_videos = path_to_video_files = sys.argv[1]
 # path_to_videos = "C:/Users/Sepideh/Desktop/MS/CSE 535/posenet_nodejs_setup-master/videos/$VIDEO_FOLDER_NAME/"
 print("to csv file path to videos: ",path_to_videos)
 
-print("Total arguments passed:", len(sys.argv))
 print("video folder name: ", sys.argv[1])
 
 def convert_to_csv(path_to_video):
